@@ -5,17 +5,16 @@ import java.util.NoSuchElementException;
 
 public class ForwardArrayIterator<E> implements Iterator<E> {
 
-	private E[] arr;    // the array to iterate over
-	// other internal fields...
+	private E[] arr;
+	private int currentposition;
 	
 	public ForwardArrayIterator(E[] arr) { 
 		this.arr = arr; 
-		// initialize other internal fields as needed
+		this.currentposition=0;
 	}
 	
 	public boolean hasNext() {
-		// rewrite...
-		return true;   
+		return this.currentposition<this.  
 	}
 
 	public E next() throws NoSuchElementException {
