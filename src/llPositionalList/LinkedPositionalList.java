@@ -1,6 +1,5 @@
 package llPositionalList;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -13,19 +12,24 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	private static class DNode<E> implements Position<E> { 
 		private E element; 
 		private DNode<E> prev, next;
+		private PositionalList<E> list;
 		public E getElement() {
 			return element;
 		}
-		public DNode(E element, DNode<E> prev, DNode<E> next) {
+		public PositionalList<E> getList(){
+			return list;
+		}
+		public DNode(E element, DNode<E> prev, DNode<E> next, PositionalList<E> list) {
 			this.element = element;
 			this.prev = prev;
 			this.next = next;
+			this.list = list;
 		}
-		public DNode(E element) {
-			this(element, null, null);
+		public DNode(E element, PositionalList<E> list) {
+			this(element, null, null, list);
 		}
-		public DNode() {
-			this(null, null, null);
+		public DNode(PositionalList<E> list) {
+			this(null, null, null, list);
 		}
 		public void setElement(E element) {
 			this.element = element;
@@ -55,8 +59,8 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	
 	
 	public LinkedPositionalList() {
-		header = new DNode<>(); 
-		trailer = new DNode<>(); 
+		header = new DNode<>(this); 
+		trailer = new DNode<>(this); 
 		header.setNext(trailer);
 		trailer.setPrev(header); 
 		size = 0; 
@@ -65,6 +69,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	private DNode<E> validate(Position<E> p) throws IllegalArgumentException { 
 		try { 
 			DNode<E> dp = (DNode<E>) p; 
+			if(dp.getList()!=this) throw new IllegalArgumentException("Using to different lists");
 			if (dp.getPrev() == null || dp.getNext() == null) 
 				throw new IllegalArgumentException("Invalid internal node."); 
 			
@@ -81,7 +86,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	}
 	
 	private DNode<E> addBetween(DNode<E> b, DNode<E> a, E e) { 
-		DNode<E> n = new DNode<>(e, b, a); 
+		DNode<E> n = new DNode<>(e, b, a, this); 
 		b.setNext(n); 
 		a.setPrev(n); 
 		size++; 
@@ -152,6 +157,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 
 	@Override
 	public E remove(Position<E> p) throws IllegalArgumentException {
+//		if(this.)
 		DNode<E> dp = validate(p); 
 		E etr = dp.getElement(); 
 		DNode<E> b = dp.getPrev(); 

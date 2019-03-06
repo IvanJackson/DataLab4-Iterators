@@ -3,7 +3,6 @@ package positionalListTesterClasses;
 
 import interfaces.Position;
 import llPositionalList.LinkedPositionalList;
-import llPositionalList.PLIteratorF2L;
 
 public class LinkedPositionalListTester3 {
 
@@ -44,13 +43,12 @@ public class LinkedPositionalListTester3 {
 		showList("list2 = ", list2);
 
 	}
-
+	
 	private static void showList(String msg, LinkedPositionalList<Integer> list) {
 		System.out.print(msg); 
 		for (Integer v : list) 
 			System.out.print(v + " "); 
 		System.out.println(" -- size = " + list.size()); 
 	}
-
 
 }
