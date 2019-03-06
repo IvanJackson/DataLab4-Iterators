@@ -14,7 +14,7 @@ public class ForwardArrayIterator<E> implements Iterator<E> {
 	}
 	
 	public boolean hasNext() {
-		return this.currentposition<this.  
+//		return this.currentposition<this.  
 	}
 
 	public E next() throws NoSuchElementException {
