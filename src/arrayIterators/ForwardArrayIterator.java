@@ -14,15 +14,14 @@ public class ForwardArrayIterator<E> implements Iterator<E> {
 	}
 	
 	public boolean hasNext() {
-//		return this.currentposition<this.  
+		return this.currentposition<this.arr.length-1;
 	}
 
 	public E next() throws NoSuchElementException {
 		if (!hasNext())
 			throw new 
 				NoSuchElementException("No more elements to iterate over."); 
-		// rewrite
-		return null;
+		return arr[++currentposition];
 	}
 
 	public void remove() throws UnsupportedOperationException {
