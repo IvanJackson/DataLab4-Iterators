@@ -65,6 +65,15 @@ public class LinkedPositionalList2<E> implements PositionalList<E> {
 		trailer.setPrev(header); 
 		size = 0; 
 	}
+	public LinkedPositionalList2(PLIteratorMaker<E> iteratorMaker) {
+		header = new DNode<>(this); 
+		trailer = new DNode<>(this); 
+		header.setNext(trailer);
+		trailer.setPrev(header); 
+		size = 0; 
+		this.iteratorMaker=iteratorMaker;
+		
+	}
 
 	private DNode<E> validate(Position<E> p) throws IllegalArgumentException { 
 		try { 
